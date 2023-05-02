@@ -1,10 +1,10 @@
-### d3TrustedHTTPd
+## d3TrustedHTTPd
 
 > Github Repo：[d3ctf-2022-pwn-d3TrustedHTTPd](https://github.com/yikesoftware/d3ctf-2022-pwn-d3TrustedHTTPd)
 
 > Author：Eqqie @ D^3CTF
 
-#### Analysis
+### Analysis
 
 This is a challenge about ARM TEE vulnerability exploitation, I wrote an HTTPd as well as an RPC middleware on top of the regular TEE Pwn. The TA provides authentication services for HTTPd and a simple file system based on OP-TEE secure storage. HTTPd is written based on mini_httpd and the RPC middleware is located in `/usr/bin/optee_d3_trusted_core`, and they are related as follows.
 
@@ -20,7 +20,7 @@ This challenge contains a lot of code and memory corruption based on logic vulne
 
 ![f5da5a5cb1efe21d620a0a63feda4ff](https://s2.loli.net/2023/05/03/sivkw9IR5JoEcUu.png)
 
-#### Step 1
+### Step 1
 
 The first vulnerability appears in the RPC implementation between HTTPd and `optee_d3_trusted_core`. HTTPd only replaces spaces with null when getting the username parameter and splices the username into the end of the string used for RPC.
 
@@ -36,7 +36,7 @@ When an attacker requests to log in to an `eqqie` user using face_id, the simila
 
 The attacker can traverse each dimension of the face_id vector in a certain step value (such as 0.015) and request the similarity of the current vector from the server to find the value that maximizes the similarity of each dimension. When all 128 dimensions in the vector have completed this calculation, the vector with the highest overall similarity will be obtained, and when the similarity exceeds the threshold of 85% in the TA, the Face ID authentication can be passed, bypassing the login restriction.
 
-#### Step 2
+### Step 2
 
 In the second step we complete user privilege elevation by combining a TOCTOU conditional competition vulnerability and a UAF vulnerability in TA to obtain Admin user privileges.
 
@@ -66,7 +66,7 @@ To complete the attack on this UAF, you can first read this [BGET Explained (phi
 
 ![image-20230502232518449](https://s2.loli.net/2023/05/03/p8WsyVN4JtRfq5K.png)
 
-#### Step 3
+### Step 3
 
 When we can get Admin privileges, we can fully use the secure file system implemented in TA based on OP-TEE secure storage (only read-only privileges for normal users). 
 
@@ -126,7 +126,7 @@ With the help of the statically compiled `gdbserver`, we can quickly determine t
 
 ![image-20230503011458586](https://s2.loli.net/2023/05/03/3D5JnBAPIoC8ptU.png)
 
-#### Exploit
+### Exploit
 
 See code in [exp.py](https://github.com/yikesoftware/d3ctf-2022-pwn-d3TrustedHTTPd/blob/main/exp.py)
 
