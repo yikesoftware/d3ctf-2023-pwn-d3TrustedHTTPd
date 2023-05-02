@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "stdint.h": "c",
+        "array": "c",
+        "string": "c",
+        "string_view": "c",
+        "vector": "c",
+        "memory": "c",
+        "system_error": "c",
+        "socket": "c",
+        "mman.h": "c",
+        "random": "c",
+        "cstring": "c",
+        "chrono": "c",
+        "algorithm": "c",
+        "time.h": "c"
+    }
+}
