@@ -102,8 +102,6 @@ But there is another flaw when renaming files, that is, it is allowed to set a f
 
 ![070b86d520221b246afa7a1b2598b79](https://s2.loli.net/2023/05/03/fnVMyxIpuTtvwAg.png)
 
-![7ac17a0ea058ffb702e9754be596f8d](https://s2.loli.net/2023/05/03/SZwUrxIDz9n7Kji.png)
-
 When the `d3_core_get_sec_file_info` function is called, the pointer to store the file information in the CA will be passed to the TA in the way of `TEEC_MEMREF_TEMP_INPUT`. This pointer references the CA's buffer on the stack.
 
 ![image-20230503004650985](https://s2.loli.net/2023/05/03/y7AS58Qx3Mq1EiI.png)
