@@ -26,7 +26,7 @@ The first vulnerability appears in the RPC implementation between HTTPd and `opt
 
 ![image-20230502220946251](https://s2.loli.net/2023/05/03/bhKWtqHs89E2jUR.png)
 
-![image-20230502221009171](assets/image-20230502221009171.png)
+![image-20230502221009171](https://s2.loli.net/2023/05/03/dnCHmKecbaWzBfN.png)
 
 `optee_d3_trusted_core` considers that different fields can be separated by spaces or `\t` (%09) when parsing RPC data, so we can inject additional fields into the RPC request via `\t`.
 
@@ -52,7 +52,7 @@ TEE is atomic when calling `TEEC_InvokeCommand` in the same session, that is, on
 
 **Disable** function is implemented by moving the user specified by username from the enable user list to the disable user list.
 
-![image-20230502224103696](assets/image-20230502224103696.png)
+![image-20230502224103696](https://s2.loli.net/2023/05/03/vQrm5nM7NJzChKa.png)
 
 We can use a race condition idea where we first login to the guest user once to make it have a session, and then use two threads to **disable the guest user** and **log in to the guest user** in parallel. There is a certain probability that when the `/api/man/user/disable` interface kicks out the guest user, the attacker gives a new session to the guest user via the `/api/login` interface, and the `/api/man/user/disable` interface moves the guest user into the disabled list. After completing this attack, the attacker holds a session that refers to the disabled user.
 
