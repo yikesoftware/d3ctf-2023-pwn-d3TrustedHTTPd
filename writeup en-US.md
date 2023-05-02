@@ -38,7 +38,7 @@ The attacker can traverse each dimension of the face_id vector in a certain step
 
 ### Step 2
 
-In the second step we complete user privilege elevation by combining a TOCTOU conditional competition vulnerability and a UAF vulnerability in TA to obtain Admin user privileges.
+In the second step we complete user privilege elevation by combining a TOCTOU race condition vulnerability and a UAF vulnerability in TA to obtain Admin user privileges.
 
 When we use the `/api/man/user/disable` API to disable a user, HTTPd completes this behavior in two steps, the first step is to kick out the corresponding user using `command user kickout` and then add the user to the disable list using `command user disable`. 
 
